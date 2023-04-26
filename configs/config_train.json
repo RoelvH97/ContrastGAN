@@ -1,0 +1,79 @@
+{
+  "GENERAL": {
+    "base_dir": "/home/roel",
+    "gpu": 2,
+    "seed": 0
+  },
+  "DATA": {
+    "bias": -1024,
+    "data_dir": "/home/roel/data",
+    "datasets": ["IDR_CADRADS"],
+    "factor": 600,
+    "fold": 0,
+    "normalize": true,
+    "n_slices": 1,
+    "ps": 128,
+    "random_shift": 32
+  },
+  "LOSS": {
+    "GAN": {
+      "name": "WassersteinLoss",
+      "weight": 1
+    },
+    "CONTRAST": {
+      "bias": -1024,
+      "factor": 600,
+      "name": "HULoss",
+      "min": 350,
+      "max": 450,
+      "weight": 1
+    },
+    "SIMILARITY": {
+      "name": "NCCLoss",
+      "e": 1e-8,
+      "weight": 1
+    }
+  },
+  "MODEL": {
+    "DISCRIMINATOR": {
+      "channels_in": 1,
+      "channels_out": 1,
+      "model": "NLayerDiscriminator",
+      "n_layers": 3,
+      "ndf": 64,
+      "norm": "BatchNorm2d"
+    },
+    "GENERATOR": {
+      "channels_in": 1,
+      "channels_out": 1,
+      "dropout": false,
+      "model": "ResnetGenerator",
+      "n_layers": 6,
+      "ngf": 64,
+      "norm": "BatchNorm2d",
+      "padding": "reflect"
+    },
+    "WEIGHTS": {
+      "iteration": 100000,
+      "load": false,
+      "timestamp": "27-1-2023_12-53-58"
+    }
+  },
+  "OPTIMIZER": {
+    "batch_size": 64,
+    "discriminator": "Adam",
+    "disc_lr": 2e-4,
+    "disc_b1": 5e-1,
+    "disc_b2": 0.999,
+    "generator": "Adam",
+    "gen_lr": 2e-4,
+    "gen_b1": 5e-1,
+    "gen_b2": 0.999,
+    "gen_every": 5,
+    "log_every": 200,
+    "lr_policy": "MultiStepLR",
+    "lr_milestones": [60000, 80000],
+    "lr_gamma": 0.1,
+    "n_iter": 100001
+  }
+}
